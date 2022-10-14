@@ -1,1 +1,1 @@
-script that generates the assembly code (Intel syntax) of a C code and save it in an output file
+UNIX is basically a simple operating system, but you have to be a genius to understand the simplicity
