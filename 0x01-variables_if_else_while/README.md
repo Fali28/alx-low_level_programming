@@ -1,1 +1,1 @@
-program that prints all possible combinations of single-digit numbers.
+Inventing is a combination of brains and materials. The more brains you use, the less material you need
