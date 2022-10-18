@@ -1,14 +1,15 @@
 #include "main.h"
 
 /**
-*_islower - Checking for char alphabet
+*_islower - Checking if a char is lower
 *@c: the char for checking
 *
-*Return: 1 if char letter is lower or upper, 0 otherwise
+*Return: 1 if char letter is lower , 0 otherwise
 */
+
 int _islower(int c)
 {
-	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
+	if (c >= 'a' && c <= 'z')
 		return (1);
 	else
 		return (0);
