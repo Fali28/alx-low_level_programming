@@ -1,1 +1,1 @@
-I feel like I am diagonally parked in a parallel universe
+function that prints a square, followed by a new line
