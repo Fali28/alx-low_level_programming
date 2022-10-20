@@ -1,1 +1,1 @@
- Numbers constitute the only universal language
+The shortest distance between two points is a straight line
