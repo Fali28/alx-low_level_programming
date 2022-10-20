@@ -1,1 +1,1 @@
-program that prints the numbers from 1 to 100
+function that prints a triangle, followed by a new line
