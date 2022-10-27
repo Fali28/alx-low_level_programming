@@ -7,19 +7,18 @@
 */
 char *leet(char *s)
 {
-	int f;
-	int h;
-	char I[] = "oI_ea__t";
+	int k;
+	int l;
+	char a[]=
+	char b[]=
 
-	for (f = 0; s[f] != '\0'; f++)
+	for (k = 0; *(s + k); k++)
 	{
-	for (h = 0; I[h] != '\0'; h++)
-	{
-	if (s[f] == I[h] || s[f] == (I[h] - 32))
-	{
-	s[f] = h + '0';
-	}
-	}
+		for (l = 0; l <= 9; l++)
+		{
+			if (a[l] == s[k])
+				s[k] = b[l];
+		}
 	}
 	return (s);
 }
