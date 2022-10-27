@@ -1,1 +1,1 @@
-function that capitalizes all words of a string
+function that encodes a string into 1337
