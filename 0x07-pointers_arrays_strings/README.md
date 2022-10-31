@@ -1,1 +1,1 @@
-function that sets the value of a pointer to a char
+file that contains the password for the crackme2 executable
