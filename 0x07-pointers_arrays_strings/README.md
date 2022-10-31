@@ -1,1 +1,1 @@
-function that fills memory with a constant byte
+function that gets the length of a prefix substring
