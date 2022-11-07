@@ -5,7 +5,7 @@
 /**
 *strtow- a program that that splits a string into words
 *@str: string
-*Return: NULL if str == NULL or str == ""
+*Return: pointer to an array of strings (letter)
 */
 char **strtow(char *str)
 {
@@ -37,7 +37,8 @@ char **strtow(char *str)
 			{
 				for (t = 0; t < z; t++)
 					free(letter[z]);
-					return (NULL);
+				free(letter);
+				return (NULL);
 			}
 			for (s = 0; s < bin; s++, x++)
 				letter[z][s] = str[x];
