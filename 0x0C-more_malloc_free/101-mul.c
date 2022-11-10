@@ -1,14 +1,14 @@
 #include "main.h"
 #include <stdlib.h>
-#include <stddef.h>
+#include <stdio.h>
 
 /**
-*_print - a program that moves a string from one
-*place to the left and prints the string
-*@l: string to be moved
-*@str: string's size
-*Return: void
-*/
+ * _print - moves a string one place to the left and prints the string
+ * @str: string to move
+ * @l: size of string
+ *
+ * Return: void
+ */
 void _print(char *str, int l)
 {
 	int i, j;
@@ -22,52 +22,53 @@ void _print(char *str, int l)
 			_putchar(str[i]);
 		i++;
 	}
+
 	_putchar('\n');
 	free(str);
 }
 
 /**
-*mul - a program that multiplies a character with a string and
-*places the answer into dest
-*@num: string to be multiplied
-*@num_index: last non NULL index of num
-*@dest_index: highest index for addition to be started
-*@n: character for multiplication
-*@dest: multiplication's destination
-*Return: pointer to dest, or NULL on failure
-*/
+ * mul - multiplies a char with a string and places the answer into dest
+ * @n: char to multiply
+ * @num: string to multiply
+ * @num_index: last non NULL index of num
+ * @dest: destination of multiplication
+ * @dest_index: highest index to start addition
+ *
+ * Return: pointer to dest, or NULL on failure
+ */
 char *mul(char n, char *num, int num_index, char *dest, int dest_index)
 {
-	int j, k, mul, mulpro, sum, sumpro;
+	int j, k, mul, mulrem, add, addrem;
 
-	mulpro = sumpro = 0;
+	mulrem = addrem = 0;
 	for (j = num_index, k = dest_index; j >= 0; j--, k--)
 	{
-		mul = (n - '0') * (num[j] - '0') + mulpro;
-		mulpro = mul / 10;
-		sum = (dest[k] - '0') + (mul % 10) + sumpro;
-		sumpro = sum / 10;
-		dest[k] = sum % 10 + '0';
+		mul = (n - '0') * (num[j] - '0') + mulrem;
+		mulrem = mul / 10;
+		add = (dest[k] - '0') + (mul % 10) + addrem;
+		addrem = add / 10;
+		dest[k] = add % 10 + '0';
 	}
-	for (sumpro += mulpro; k >= 0 && sumpro; k--)
+	for (addrem += mulrem; k >= 0 && addrem; k--)
 	{
-		sum = (dest[k] - '0') + sumpro;
-		sumpro = sum / 10;
-		dest[k] = sum % 10 + '0';
+		add = (dest[k] - '0') + addrem;
+		addrem = add / 10;
+		dest[k] = add % 10 + '0';
 	}
-	if (sumpro)
+	if (addrem)
 	{
 		return (NULL);
 	}
 	return (dest);
 }
-
 /**
-*check_digits - a program that checks the arguments to ensure they are digits
-*@av: point to arguments
-*Return: 0 if digits, otherwise 1
-*/
-int check_digits(char **av)
+ * check_for_digits - checks the arguments to ensure they are digits
+ * @av: pointer to arguments
+ *
+ * Return: 0 if digits, 1 if not
+ */
+int check_for_digits(char **av)
 {
 	int i, j;
 
@@ -83,63 +84,65 @@ int check_digits(char **av)
 }
 
 /**
-*_init - a program that initializes a string
-*@n: length of string
-*@str: string to be intialized
-*Return: void
-*/
-void _init(char *str, int n)
+ * init - initializes a string
+ * @str: sting to initialize
+ * @l: length of strinf
+ *
+ * Return: void
+ */
+void init(char *str, int l)
 {
-	int g;
+	int i;
 
-	for (g = 0; g < n; g++)
-		str[g] = '0';
-	str[g] = '\0';
+	for (i = 0; i < l; i++)
+		str[i] = '0';
+	str[i] = '\0';
 }
 
 /**
-*main - a program that multiplies two numbers
-*@argv: argument vector
-*@argc: argument count
-*Return: 0, or exit status of 98 if it fails
-*/
+ * main - multiply two numbers
+ * @argc: number of arguments
+ * @argv: argument vector
+ *
+ * Return: zero, or exit status of 98 if failure
+ */
 int main(int argc, char *argv[])
 {
-	int bin1, bin2, binm, xy, y;
+	int l1, l2, ln, ti, i;
 	char *a;
 	char *t;
 	char e[] = "Error\n";
 
-	if (argc != 3 || check_digits(argv))
+	if (argc != 3 || check_for_digits(argv))
 	{
-		for (xy = 0; e[xy]; xy++)
-			_putchar(e[xy]);
+		for (ti = 0; e[ti]; ti++)
+			_putchar(e[ti]);
 		exit(98);
 	}
-	for (bin1 = 0; argv[1][bin1]; bin1++)
+	for (l1 = 0; argv[1][l1]; l1++)
 		;
-	for (bin2 = 0; argv[2][bin2]; bin2++)
+	for (l2 = 0; argv[2][l2]; l2++)
 		;
-	binm =  bin1 + bin2 + 1;
-	a = malloc(binm * sizeof(char));
+	ln = l1 + l2 + 1;
+	a = malloc(ln * sizeof(char));
 	if (a == NULL)
 	{
-		for (xy = 0; e[xy]; xy++)
-			_putchar(e[xy]);
+		for (ti = 0; e[ti]; ti++)
+			_putchar(e[ti]);
 		exit(98);
 	}
-	_init(a, binm - 1);
-	for (xy = bin2 - 1, y = 0; xy >= 0; xy--, y++)
+	init(a, ln - 1);
+	for (ti = l2 - 1, i = 0; ti >= 0; ti--, i++)
 	{
-		t = mul(argv[2][xy], argv[1], bin1 - 1, a, (binm - 2) - y);
+		t = mul(argv[2][ti], argv[1], l1 - 1, a, (ln - 2) - i);
 		if (t == NULL)
 		{
-			for (xy = 0; e[xy]; xy++)
-				_putchar(e[xy]);
+			for (ti = 0; e[ti]; ti++)
+				_putchar(e[ti]);
 			free(a);
 			exit(98);
 		}
 	}
-	_print(a, binm - 1);
+	_print(a, ln - 1);
 	return (0);
 }
