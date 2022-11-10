@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 int _putchar(char c);
+int main(int argc, char *argv[]);
 void _print(char *str, int l);
 char *mul(char n, char *num, int num_index, char *dest, int dest_index);
 int check_digits(char **av);
