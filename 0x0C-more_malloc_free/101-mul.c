@@ -11,16 +11,16 @@
 */
 void _print(char *str, int l)
 {
-	int p, q;
+	int i, j;
 
-	p = q = 0;
-	while (p < l)
+	i = j = 0;
+	while (i < l)
 	{
-		if (str[p] != '0')
-			q = 1;
-		if (q || p == l - 1)
-			_putchar(str[p]);
-		p++;
+		if (str[i] != '0')
+			j = 1;
+		if (j || i == l - 1)
+			_putchar(str[i]);
+		i++;
 	}
 	_putchar('\n');
 	free(str);
@@ -38,22 +38,22 @@ void _print(char *str, int l)
 */
 char *mul(char n, char *num, int num_index, char *dest, int dest_index)
 {
-	int g, i, mul, mulpro, sum, sumpro;
+	int j, k, mul, mulpro, sum, sumpro;
 
 	mulpro = sumpro = 0;
-	for (g = num_index, i = dest_index; g >= 0; g--, i--)
+	for (j = num_index, k = dest_index; j >= 0; j--, k--)
 	{
-		mul = (n - '0') * (num[g] - '0') + mulpro;
+		mul = (n - '0') * (num[j] - '0') + mulpro;
 		mulpro = mul / 10;
-		sum = (dest[i] - '0') + (mul % 10) + sumpro;
+		sum = (dest[k] - '0') + (mul % 10) + sumpro;
 		sumpro = sum / 10;
-		dest[i] = sum % 10 + '0';
+		dest[k] = sum % 10 + '0';
 	}
-	for (sumpro += mulpro; i >= 0 && sumpro; i--)
+	for (sumpro += mulpro; k >= 0 && sumpro; k--)
 	{
-		sum = (dest[i] - '0') + sumpro;
+		sum = (dest[k] - '0') + sumpro;
 		sumpro = sum / 10;
-		dest[i] = sum % 10 + '0';
+		dest[k] = sum % 10 + '0';
 	}
 	if (sumpro)
 	{
@@ -69,13 +69,13 @@ char *mul(char n, char *num, int num_index, char *dest, int dest_index)
 */
 int check_digits(char **av)
 {
-	int g, h;
+	int i, j;
 
-	for (g = 1; g < 3; g++)
+	for (i = 1; i < 3; i++)
 	{
-		for (h = 0; av[g][h]; h++)
+		for (j = 0; av[i][j]; j++)
 		{
-			if (av[g][h] < '0' || av[g][h] > '9')
+			if (av[i][j] < '0' || av[i][j] > '9')
 				return (1);
 		}
 	}
@@ -106,14 +106,14 @@ void _init(char *str, int n)
 int main(int argc, char *argv[])
 {
 	int bin1, bin2, binm, xy, y;
-	char *p;
-	char *q;
-	char g[] = "Error\n";
+	char *a;
+	char *t;
+	char e[] = "Error\n";
 
 	if (argc != 3 || check_digits(argv))
 	{
-		for (xy = 0; g[xy]; xy++)
-			_putchar(g[xy]);
+		for (xy = 0; e[xy]; xy++)
+			_putchar(e[xy]);
 		exit(98);
 	}
 	for (bin1 = 0; argv[1][bin1]; bin1++)
@@ -121,25 +121,25 @@ int main(int argc, char *argv[])
 	for (bin2 = 0; argv[2][bin2]; bin2++)
 		;
 	binm =  bin1 + bin2 + 1;
-	p = malloc(binm * sizeof(char));
-	if (p == NULL)
+	a = malloc(binm * sizeof(char));
+	if (a == NULL)
 	{
-		for (xy = 0; g[xy]; xy++)
-			_putchar(g[xy]);
+		for (xy = 0; e[xy]; xy++)
+			_putchar(e[xy]);
 		exit(98);
 	}
-	_init(p, binm - 1);
+	_init(a, binm - 1);
 	for (xy = bin2 - 1, y = 0; xy >= 0; xy--, y++)
 	{
-		q = mul(argv[2][xy], argv[1], bin1 - 1, p, (binm - 2) - y);
-		if (q == NULL)
+		t = mul(argv[2][xy], argv[1], bin1 - 1, a, (binm - 2) - y);
+		if (t == NULL)
 		{
-			for (xy = 0; g[xy]; xy++)
-				_putchar(g[xy]);
-			free(p);
+			for (xy = 0; e[xy]; xy++)
+				_putchar(e[xy]);
+			free(a);
 			exit(98);
 		}
 	}
-	_print(p, binm - 1);
+	_print(a, binm - 1);
 	return (0);
 }
